@@ -6,7 +6,7 @@ class Myclass:
         self.name = input()
         self.surname = input()
     def printString(self):
-        print(self.name,self.surname)
+        print(self.name.upper(),self.surname.upper())
 p1 = Myclass()
 p1.getString()
 p1.printString()
