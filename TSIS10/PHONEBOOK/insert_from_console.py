@@ -34,5 +34,5 @@ phone_num = input("Input phone number :")
 city = input("Input city :")
 address = input("Input address :")
 if __name__ == '__main__' :
-    insert_conacts(tuple((name, phone_num)))
-    insert_contacts_location(tuple((name, city, address)))
+    insert_conacts((name, phone_num))
+    insert_contacts_location((name, city, address))

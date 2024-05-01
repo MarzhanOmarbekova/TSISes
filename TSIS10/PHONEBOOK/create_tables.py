@@ -8,7 +8,7 @@ def create_tables ():
         """
         CREATE TABLE contacts (
             name VARCHAR (50) PRIMARY KEY,
-            phone_number VARCHAR (20) NOT NULL
+            phone_number VARCHAR (20) NOT NULL 
         );
         """,
         """
@@ -17,6 +17,7 @@ def create_tables ():
             city VARCHAR(100),
             address VARCHAR(255),
             FOREIGN KEY (name) REFERENCES contacts (name)
+            ON UPDATE CASCADE ON DELETE CASCADE
         );
         """
     )

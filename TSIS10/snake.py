@@ -34,6 +34,7 @@ cur.execute("""
             """.format(user_name))
 
 user = cur.fetchone()
+# if it is new
 if user==None:
     cur.execute("""
                 INSERT INTO users (user_name,user_score,user_level)
@@ -41,8 +42,11 @@ if user==None:
                 """.format(user_name,user_score,user_level)
                 )
     conn.commit()
+#if it isnt new, get info 
 else :
     user_name,user_score,user_level = user
+
+# GAME
 
 clock = pg.time.Clock()
 score = 0
@@ -108,6 +112,7 @@ while not done:
     for event in pg.event.get():
         if event.type == pg.QUIT:
             done = True
+            # UPDATING ABOUT PLAYER
             cur.execute("""
                         UPDATE users 
                         SET user_score = '{}', user_level = '{}'
@@ -177,8 +182,6 @@ while not done:
         if i==food_pos:
             food_pos =  [random.randint(2,width//20-1)*20 ,random.randint(2,height//20-1)*20 ]
 
-        
-    
     food_eaten= False
     screen.fill('black')
     pg.draw.line(screen ,(0,255,0), (0,20), (800, 20) )
@@ -192,6 +195,7 @@ while not done:
 
     # Touching corners
     if snake_pos[0]>width-20 or snake_pos[0]<0 or snake_pos[1]<20 or snake_pos[1]>height-20 :
+        # When game is over , update data
         cur.execute("""
                         UPDATE users 
                         SET user_score = '{}', user_level = '{}'
@@ -203,6 +207,7 @@ while not done:
     # Touching own body
     for part in snake_body[1:]:
         if snake_pos == part:
+            # When game is over , update data
             cur.execute("""
                         UPDATE users 
                         SET user_score = '{}', user_level = '{}'
